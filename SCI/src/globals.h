@@ -48,6 +48,7 @@ SOFTWARE.
 
 #if USE_CHEETAH
 #include "cheetah/cheetah-api.h"
+#include "BuildingBlocks/geometric_perspective_protocols.h"
 #endif
 
 // #define MULTI_THREADING
@@ -56,6 +57,9 @@ SOFTWARE.
 
 extern sci::NetIO *io;
 extern sci::OTPack<sci::NetIO> *otpack;
+// Change: count truncation operations
+extern int count_trunc;
+extern int count_relu_trunc;
 
 #ifdef SCI_OT
 extern LinearOT *mult;

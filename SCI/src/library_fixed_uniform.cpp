@@ -26,7 +26,6 @@ SOFTWARE.
 #include "functionalities_uniform.h"
 #include "globals.h"
 #include "library_fixed_common.h"
-
 #define LOG_LAYERWISE
 #define VERIFY_LAYERWISE
 #undef VERIFY_LAYERWISE // undefine this to turn OFF the verifcation
@@ -1608,6 +1607,8 @@ void EndComputation() {
             << " MiB." << std::endl;
   std::cout << "Number of rounds = " << ioArr[0]->num_rounds - num_rounds
             << std::endl;
+  std::cout << "Total truncation = " << count_trunc << std::endl;
+  std::cout << "Total truncation after relu = " << count_relu_trunc << std::endl;
   if (party == SERVER) {
     io->recv_data(&totalCommClient, sizeof(uint64_t));
     std::cout << "Total comm (sent+received) = "
@@ -1699,7 +1700,7 @@ void EndComputation() {
   std::cout << "------------------------------------------------------\n";
 #if USE_CHEETAH
   int64_t rcot = 0;
-  for (size_t i = 0; i < MAX_THREADS; ++i) {
+  for (size_t i = 0; i < 1; ++i) {
     rcot += otpackArr[i]->silent_ot->get_rcot_count();
   }
   std::cout << "Total #Ferret's RCOT " << rcot << std::endl;

@@ -19,9 +19,16 @@ do
 done
 
 cd $BUILD_DIR/
-cmake .. -DCMAKE_BUILD_TYPE=Release -DSCI_BUILD_NETWORKS=ON -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DCMAKE_PREFIX_PATH=$BUILD_DIR -DUSE_APPROX_RESHARE=ON
-for net in resnet50 sqnet densenet121
-do
-     make ${net}-cheetah -j4 
-     make ${net}-SCI_HE -j4 
-done
+# cmake .. -DCMAKE_BUILD_TYPE=Release -DSCI_BUILD_NETWORKS=ON -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DCMAKE_PREFIX_PATH=$BUILD_DIR -DUSE_APPROX_RESHARE=ON
+# Change: this server's openSSL is installed in /usr
+cmake .. -DCMAKE_BUILD_TYPE=Release -DSCI_BUILD_NETWORKS=ON -DOPENSSL_ROOT_DIR=/usr -DCMAKE_PREFIX_PATH=$BUILD_DIR -DUSE_APPROX_RESHARE=ON
+# for net in resnet50 sqnet densenet121
+# do
+#      make ${net}-cheetah -j4 
+#      make ${net}-SCI_HE -j4 
+# done
+
+# Change: only make net we need to test
+make module-cheetah -j8
+make resnet50-cheetah -j8
+make densenet121-cheetah -j8

@@ -482,6 +482,8 @@ void funcTruncateTwoPowerRing(int curParty, sci::NetIO *curio,
 void funcTruncateTwoPowerRingWrapper(int size, intType *inp, intType *outp,
                                      int consSF, int bw, bool isSigned,
                                      uint8_t *msbShare) {
+  //  Change: count truncation operations without affect of relu
+  count_trunc += size;
   assert(size % 8 == 0);
 #ifdef MULTITHREADED_TRUNC
   std::thread truncThreads[num_threads];
@@ -520,6 +522,8 @@ void funcTruncateTwoPowerRingWrapper(int size, intType *inp, intType *outp,
 void funcReLUTruncateTwoPowerRingWrapper(int size, intType *inp, intType *outp,
                                          int consSF, int32_t bw,
                                          bool isSigned) {
+  //  Change: count truncation operations after relu
+  count_relu_trunc += size;
   assert(size % 8 == 0);
 #ifdef MULTITHREADED_TRUNC
   std::thread truncThreads[num_threads];

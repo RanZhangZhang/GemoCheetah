@@ -48,3 +48,5 @@ endmacro()
 add_network_cheetah(resnet50)
 add_network_cheetah(sqnet)
 add_network_cheetah(densenet121)
+# Change: add module
+add_network_cheetah(module)
